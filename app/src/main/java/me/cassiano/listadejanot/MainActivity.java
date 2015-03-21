@@ -1,65 +1,84 @@
 package me.cassiano.listadejanot;
 
-import android.content.res.AssetManager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
-import me.cassiano.listadejanot.adapters.LJListViewAdapter;
-import me.cassiano.listadejanot.models.Party;
 
+public class MainActivity extends BaseActivity {
 
-public class MainActivity extends ActionBarActivity {
+    private DrawerLayout drawer;
+    private ListView drawerMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setActionBarIcon(R.drawable.ic_ab_drawer);
 
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
+        drawer = (DrawerLayout) findViewById(R.id.drawer);
+        drawer.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
+
+        String[] menuItems = getResources().getStringArray(R.array.menu_items);
+
+        drawerMenu = (ListView) drawer.findViewById(R.id.drawerMenu);
+        drawerMenu.setAdapter(new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, menuItems));
+
+        drawerMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectItem(position);
+            }
+        });
+
+        selectItem(0);
+
+    }
+
+    private void selectItem(int position) {
+
+        Fragment fragment = null;
+
+        switch (position) {
+            case 0:
+                fragment = new PartiesFragment();
+                break;
+            case 1:
+                fragment = new AboutFragment();
+                break;
         }
 
-        loadJsonFromAssets();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().
+                replace(R.id.content_frame, fragment).commit();
+
+        drawerMenu.setItemChecked(position, true);
+        drawer.closeDrawer(drawerMenu);
 
 
     }
 
-    private void loadJsonFromAssets() {
-        AssetManager assetManager = getAssets();
-        InputStream inputStream = null;
-        try {
-            inputStream = assetManager.open("lista-janot.json");
-        } catch (IOException e) {
-            Log.e("tag", e.getMessage());
-        }
-
-        Reader reader = new InputStreamReader(inputStream);
-
-        Gson gson = new Gson();
-
-        List<Party> parties = gson.fromJson(reader, new TypeToken<List<Party>>() {}.getType());
-
-        ListView lv = (ListView) findViewById(R.id.parties);
-        LJListViewAdapter adapter = new LJListViewAdapter(this, parties);
-        adapter.sortByNumberOfPoliticians(false);
-        lv.setAdapter(adapter);
-
+    @Override
+    public void setTitle(CharSequence title) {
+        getSupportActionBar().setTitle(title);
     }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_main;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,14 +89,10 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawer.openDrawer(Gravity.START);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

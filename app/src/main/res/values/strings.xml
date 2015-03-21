@@ -5,4 +5,15 @@
 
     <string name="party_number">%1$d indiciados</string>
     <string name="list_item_image_view_content_description">PartyImage</string>
+
+    <string name="app_description">O aplicativo Lista de Janot é um trabalho acadêmico para a disciplina de Laboratório de Desenvolvimento para Móveis da PUC Minas, lecionada pelo professor Humberto.</string>
+
+    <string name="fragment_parties_title">Partidos</string>
+    <string name="fragment_about_title">Sobre</string>
+
+    <string-array name="menu_items">
+        <item>Partidos</item>
+        <item>Sobre</item>
+    </string-array>
+
 </resources>

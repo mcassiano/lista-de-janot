@@ -6,5 +6,6 @@
     <item name="accent" type="color">#810001</item>
     <item name="list_item_text_color" type="color">#222222</item>
     <item name="list_item_background_color" type="color">#FFFFFF</item>
+    <color name="windowBackgroundColor">#333333</color>
 
 </resources>
