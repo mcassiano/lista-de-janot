@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Lista de Janot</string>
+
+    <string name="action_settings">Ajustes</string>
+
+    <string name="party_number">%1$d indiciados</string>
+    <string name="list_item_image_view_content_description">PartyImage</string>
+</resources>
