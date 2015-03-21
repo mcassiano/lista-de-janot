@@ -1,5 +1,6 @@
 package me.cassiano.listadejanot;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -16,10 +18,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
-import me.cassiano.listadejanot.adapters.LJListViewAdapter;
+import me.cassiano.listadejanot.adapters.PartyListViewAdapter;
 import me.cassiano.listadejanot.models.Party;
+import me.cassiano.listadejanot.models.Politician;
 
 /**
  * Created by matheus on 3/21/15.
@@ -36,9 +40,23 @@ public class PartiesFragment extends Fragment {
         List<Party> parties = loadPartiesFromJson();
 
         ListView lv = (ListView) view.findViewById(R.id.parties);
-        LJListViewAdapter adapter = new LJListViewAdapter(getActivity(), parties);
+        PartyListViewAdapter adapter = new PartyListViewAdapter(getActivity(), parties);
         adapter.sortByNumberOfPoliticians(false);
         lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Party party = (Party) parent.getAdapter().getItem(position);
+                ArrayList<Politician> pols = (ArrayList<Politician>) party.getPoliticians();
+
+                Intent intent = new Intent(getActivity(), PartyDetailActivity.class);
+                intent.putParcelableArrayListExtra(PartyDetailActivity.EXTRA_LIST_ARRAY,
+                        pols);
+
+                getActivity().startActivity(intent);
+            }
+        });
 
         return view;
 

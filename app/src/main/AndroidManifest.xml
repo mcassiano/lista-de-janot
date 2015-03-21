@@ -16,6 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PartyDetailActivity"
+            android:label="@string/title_activity_party_detail"
+            android:parentActivityName="me.cassiano.listadejanot.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.cassiano.listadejanot.MainActivity"/>
+
+        </activity>
     </application>
 
 </manifest>

@@ -19,12 +19,12 @@ import me.cassiano.listadejanot.models.Party;
 /**
  * Created by matheus on 3/20/15.
  */
-public class LJListViewAdapter extends BaseAdapter {
+public class PartyListViewAdapter extends BaseAdapter {
 
     private List<Party> data;
     private Context context;
 
-    public LJListViewAdapter(Context context, List<Party> data) {
+    public PartyListViewAdapter(Context context, List<Party> data) {
         this.context = context;
         this.data = data;
     }

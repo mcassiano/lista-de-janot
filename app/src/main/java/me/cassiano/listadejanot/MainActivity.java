@@ -70,11 +70,6 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void setTitle(CharSequence title) {
-        getSupportActionBar().setTitle(title);
-    }
-
-    @Override
     protected int getLayoutResource() {
         return R.layout.activity_main;
     }

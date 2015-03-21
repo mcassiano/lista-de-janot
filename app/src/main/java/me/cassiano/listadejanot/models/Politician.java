@@ -1,9 +1,12 @@
 package me.cassiano.listadejanot.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by matheus on 3/20/15.
  */
-public class Politician {
+public class Politician implements Parcelable {
 
     private int id;
     private String name;
@@ -86,4 +89,45 @@ public class Politician {
     public void setDefense(String defense) {
         this.defense = defense;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeInt(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.party);
+        dest.writeString(this.position);
+        dest.writeString(this.state);
+        dest.writeString(this.status);
+        dest.writeString(this.picture);
+        dest.writeString(this.suspicion);
+        dest.writeString(this.defense);
+    }
+
+    public Politician(Parcel pc) {
+        this.id = pc.readInt();
+        this.name = pc.readString();
+        this.party = pc.readString();
+        this.position = pc.readString();
+        this.state = pc.readString();
+        this.status = pc.readString();
+        this.picture = pc.readString();
+        this.suspicion = pc.readString();
+        this.defense = pc.readString();
+    }
+
+    public static final Parcelable.Creator<Politician> CREATOR = new Parcelable.Creator<Politician>() {
+        public Politician createFromParcel(Parcel in) {
+            return new Politician(in);
+        }
+
+        public Politician[] newArray(int size) {
+            return new Politician[size];
+        }
+    };
 }

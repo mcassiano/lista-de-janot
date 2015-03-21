@@ -22,6 +22,11 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    public void setTitle(CharSequence title) {
+        getSupportActionBar().setTitle(title);
+    }
+
     protected abstract int getLayoutResource();
 
     protected void setActionBarIcon(int iconRes) {
