@@ -5,6 +5,7 @@
 
     <string name="party_number">%1$d indiciados</string>
     <string name="politician_line2">%1$s, %2$s</string>
+    <string name="politician_line3">Situação: %1$s</string>
     <string name="list_item_image_view_content_description">PartyImage</string>
 
     <string name="app_description">O aplicativo Lista de Janot é um trabalho acadêmico para a disciplina de Laboratório de Desenvolvimento para Móveis da PUC Minas, lecionada pelo professor Humberto.</string>
@@ -17,8 +18,12 @@
         <item>Partidos</item>
         <item>Sobre</item>
     </string-array>
-    <string name="title_activity_party_detail">PartyDetailActivity</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_party_detail">PartyDetailActivity</string>
+    <string name="title_politician_list">Politicians</string>
+    <string name="title_politician_detail">Politician Detail</string>
+    <string name="politician_detail_suspicion">Suspeita</string>
+    <string name="politician_detail_defense">O que diz?</string>
+
 
 </resources>

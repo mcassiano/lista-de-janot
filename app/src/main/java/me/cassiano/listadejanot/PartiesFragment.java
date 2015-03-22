@@ -50,8 +50,8 @@ public class PartiesFragment extends Fragment {
                 Party party = (Party) parent.getAdapter().getItem(position);
                 ArrayList<Politician> pols = (ArrayList<Politician>) party.getPoliticians();
 
-                Intent intent = new Intent(getActivity(), PartyDetailActivity.class);
-                intent.putParcelableArrayListExtra(PartyDetailActivity.EXTRA_LIST_ARRAY,
+                Intent intent = new Intent(getActivity(), PoliticianListActivity.class);
+                intent.putParcelableArrayListExtra(PoliticianListActivity.EXTRA_LIST_ARRAY,
                         pols);
 
                 getActivity().startActivity(intent);
