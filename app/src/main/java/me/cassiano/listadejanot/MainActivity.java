@@ -1,11 +1,10 @@
 package me.cassiano.listadejanot;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -51,7 +50,12 @@ public class MainActivity extends BaseActivity {
             case 0:
                 fragment = new PartiesFragment();
                 break;
+
             case 1:
+                fragment = new TweetsFragment();
+                break;
+
+            case 2:
                 fragment = new AboutFragment();
                 break;
         }
@@ -71,13 +75,6 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

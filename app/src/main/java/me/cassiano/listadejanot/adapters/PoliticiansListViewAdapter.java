@@ -8,12 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
 
 import me.cassiano.listadejanot.R;
-import me.cassiano.listadejanot.models.Party;
 import me.cassiano.listadejanot.models.Politician;
 
 /**
@@ -22,11 +20,12 @@ import me.cassiano.listadejanot.models.Politician;
 public class PoliticiansListViewAdapter extends BaseAdapter {
 
     private List<Politician> data;
-    private Context context;
 
-    public PoliticiansListViewAdapter(Context context, List<Politician> data) {
-        this.context = context;
-        this.data = data;
+    public PoliticiansListViewAdapter(List<Politician> data) {
+        this.data = new ArrayList<>();
+
+        if (data != null)
+            addAll(data);
     }
 
     @Override
@@ -39,7 +38,8 @@ public class PoliticiansListViewAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater =
-                    (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    (LayoutInflater) parent.getContext().
+                            getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             convertView = inflater.inflate(R.layout.lj_listview_item, parent, false);
         }
@@ -51,16 +51,16 @@ public class PoliticiansListViewAdapter extends BaseAdapter {
         Politician politician = (Politician) getItem(position);
 
         int imageId =
-                context.getResources().
-                        getIdentifier(
-                                "drawable/" + politician.getPicture(), "drawable", context.getPackageName());
+                parent.getContext().getResources().getIdentifier(
+                        "drawable/" + politician.getPicture(), "drawable",
+                        parent.getContext().getPackageName());
 
         iv.setImageResource(imageId);
 
         tv1.setText(politician.getName());
 
         String pnText = String.format(
-                context.getString(R.string.politician_line2),
+                parent.getContext().getString(R.string.politician_line2),
                 politician.getPosition(), politician.getState());
 
         tv2.setText(pnText);
@@ -76,5 +76,10 @@ public class PoliticiansListViewAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+
+    public void addAll(List<Politician> politicians) {
+        data.addAll(politicians);
     }
 }

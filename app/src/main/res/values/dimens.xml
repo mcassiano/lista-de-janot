@@ -7,4 +7,5 @@
     <dimen name="list_item_padding">2dp</dimen>
     <dimen name="list_item_image_view_size">60dp</dimen>
     <dimen name="list_item_image_view_padding">5dp</dimen>
+    <dimen name="tweet_row_image_view_size">90dp</dimen>
 </resources>

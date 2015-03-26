@@ -1,7 +1,6 @@
 package me.cassiano.listadejanot.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -22,11 +22,13 @@ import me.cassiano.listadejanot.models.Party;
 public class PartyListViewAdapter extends BaseAdapter {
 
     private List<Party> data;
-    private Context context;
 
-    public PartyListViewAdapter(Context context, List<Party> data) {
-        this.context = context;
-        this.data = data;
+    public PartyListViewAdapter(List<Party> data) {
+        this.data = new ArrayList<>();
+
+        if (data != null)
+            addAll(data);
+
     }
 
     @Override
@@ -39,7 +41,8 @@ public class PartyListViewAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater =
-                    (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    (LayoutInflater) parent.getContext().
+                            getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             convertView = inflater.inflate(R.layout.lj_listview_item, parent, false);
         }
@@ -51,16 +54,15 @@ public class PartyListViewAdapter extends BaseAdapter {
         Party party = (Party) getItem(position);
 
         int imageId =
-                context.getResources().
-                        getIdentifier(
-                                "drawable/" + party.getPicture(), "drawable", context.getPackageName());
+                parent.getContext().getResources().getIdentifier("drawable/" + party.getPicture(),
+                        "drawable", parent.getContext().getPackageName());
 
         iv.setImageResource(imageId);
 
         tv1.setText(party.getName());
 
-        String pnText = String.format(
-                context.getString(R.string.party_number), party.getPoliticians().size());
+        String pnText = String.format(parent.getContext().getString(R.string.party_number),
+                party.getPoliticians().size());
 
         tv2.setText(pnText);
 
@@ -89,5 +91,9 @@ public class PartyListViewAdapter extends BaseAdapter {
                 return res;
             }
         });
+    }
+
+    public void addAll(List<Party> parties) {
+            data.addAll(parties);
     }
 }

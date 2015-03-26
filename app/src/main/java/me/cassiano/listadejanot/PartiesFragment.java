@@ -40,7 +40,7 @@ public class PartiesFragment extends Fragment {
         List<Party> parties = loadPartiesFromJson();
 
         ListView lv = (ListView) view.findViewById(R.id.parties);
-        PartyListViewAdapter adapter = new PartyListViewAdapter(getActivity(), parties);
+        PartyListViewAdapter adapter = new PartyListViewAdapter( parties);
         adapter.sortByNumberOfPoliticians(false);
         lv.setAdapter(adapter);
 

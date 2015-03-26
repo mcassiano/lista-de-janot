@@ -6,7 +6,6 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 
-
 import java.util.List;
 
 import me.cassiano.listadejanot.adapters.PoliticiansListViewAdapter;
@@ -41,7 +40,7 @@ public class PoliticianListFragment extends ListFragment {
             politicians = getArguments().
                     getParcelableArrayList(PoliticianListActivity.EXTRA_LIST_ARRAY);
 
-            setListAdapter(new PoliticiansListViewAdapter(getActivity(), politicians));
+            setListAdapter(new PoliticiansListViewAdapter(politicians));
 
         }
 
