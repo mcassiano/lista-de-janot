@@ -13,7 +13,7 @@ Esse aplicativo é na verdade um trabalho para a disciplina de Laboratório de D
 
 Antes de compilar e rodar, crie um classe chamada TwitterConfig e configure-a da seguinte maneira:
 
-```
+```java
 
 package me.cassiano.listadejanot;
 
@@ -39,9 +39,9 @@ public class TwitterConfig {
 
 }
 
-Consiga suas chaves em: [Twitter Apps](https://apps.twitter.com)
-
 ```
+
+Consiga suas chaves em: [Twitter Apps](https://apps.twitter.com)
 
 ### Links úteis
 
