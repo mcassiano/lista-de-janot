@@ -1,48 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/list_item_background_color">
 
-    <ImageView
-        android:layout_width="@dimen/tweet_row_image_view_size"
-        android:layout_height="@dimen/tweet_row_image_view_size"
-        android:padding="@dimen/list_item_image_view_padding"
-        android:layout_marginLeft="@dimen/list_item_margin_left"
-        android:id="@+id/tweet_avatar"
-        android:layout_marginTop="@dimen/list_item_margin_top"
-        android:layout_marginRight="@dimen/list_item_margin_left" />
-
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/list_item_margin_top"
+        android:layout_marginLeft="@dimen/list_item_margin_left"
         android:layout_marginRight="@dimen/list_item_margin_left">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/list_item_text_color"
-            android:textStyle="bold"
-            android:id="@+id/tweet_username" />
+        <ImageView
+            android:layout_width="@dimen/tweet_row_image_view_size"
+            android:layout_height="@dimen/tweet_row_image_view_size"
+            android:padding="@dimen/list_item_image_view_padding"
+            android:id="@+id/tweet_avatar"
+            android:layout_marginRight="@dimen/list_item_margin_left"
+            android:layout_gravity="top" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tweet_text"
-            android:textColor="@color/list_item_text_color"
-            android:layout_marginTop="@dimen/list_item_margin_top" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/tweet_date"
-            android:textColor="@color/list_item_text_color" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/list_item_text_color"
+                    android:textStyle="bold"
+                    android:id="@+id/tweet_user_name" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/list_item_text_color"
+                    android:id="@+id/tweet_user_screename" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/tweet_date"
+                android:textColor="@color/list_item_text_color"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true" />
+
+        </RelativeLayout>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tweet_text"
+        android:textColor="@color/list_item_text_color"
+        android:padding="@dimen/list_item_image_view_padding"
+        android:layout_marginLeft="@dimen/list_item_margin_left"
+        android:layout_marginRight="@dimen/list_item_margin_left" />
 
 
 </LinearLayout>

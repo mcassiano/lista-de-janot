@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity {
         String[] menuItems = getResources().getStringArray(R.array.menu_items);
 
         drawerMenu = (ListView) drawer.findViewById(R.id.drawerMenu);
-        drawerMenu.setAdapter(new ArrayAdapter<String>(this,
+        drawerMenu.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, menuItems));
 
         drawerMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -45,6 +45,8 @@ public class MainActivity extends BaseActivity {
     private void selectItem(int position) {
 
         Fragment fragment = null;
+
+        // TODO: Criar enum ou outro meio de indentificar fragments sem ser hardcoded.
 
         switch (position) {
             case 0:

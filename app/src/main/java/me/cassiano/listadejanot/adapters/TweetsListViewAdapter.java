@@ -8,8 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ocpsoft.pretty.time.PrettyTime;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +24,12 @@ import twitter4j.Status;
 public class TweetsListViewAdapter extends BaseAdapter {
 
     private List<Status> data;
+    private PrettyTime formatter;
 
     public TweetsListViewAdapter(List<Status> tweets) {
 
         this.data = new ArrayList<>();
+        this.formatter = new PrettyTime();
 
         if (tweets != null)
             addTweets(tweets);
@@ -34,6 +38,7 @@ public class TweetsListViewAdapter extends BaseAdapter {
 
     static class TweetViewHolder {
         TextView username;
+        TextView screenName;
         TextView text;
         TextView date;
         ImageView avatar;
@@ -47,7 +52,7 @@ public class TweetsListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        TweetViewHolder holder = null;
+        TweetViewHolder holder;
 
         if (convertView == null) {
             LayoutInflater inflater =
@@ -58,7 +63,8 @@ public class TweetsListViewAdapter extends BaseAdapter {
             holder = new TweetViewHolder();
 
             holder.avatar = (ImageView) convertView.findViewById(R.id.tweet_avatar);
-            holder.username = (TextView) convertView.findViewById(R.id.tweet_username);
+            holder.username = (TextView) convertView.findViewById(R.id.tweet_user_name);
+            holder.screenName = (TextView) convertView.findViewById(R.id.tweet_user_screename);
             holder.text = (TextView) convertView.findViewById(R.id.tweet_text);
             holder.date = (TextView) convertView.findViewById(R.id.tweet_date);
 
@@ -72,8 +78,9 @@ public class TweetsListViewAdapter extends BaseAdapter {
         Status status = (Status) getItem(position);
 
         holder.username.setText(status.getUser().getName());
+        holder.screenName.setText(status.getUser().getScreenName());
         holder.text.setText(status.getText());
-        holder.date.setText(status.getCreatedAt().toString());
+        holder.date.setText(formatter.format(status.getCreatedAt()));
 
         Picasso.with(parent.getContext()).
                 load(status.getUser().getBiggerProfileImageURL()).into(holder.avatar);
