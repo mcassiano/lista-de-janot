@@ -1,14 +1,36 @@
 <resources>
     <string name="app_name">Lista de Janot</string>
 
-    <string name="action_settings">Ajustes</string>
+    <string name="version">Versão %1$s</string>
 
     <string name="party_number">%1$d indiciados</string>
     <string name="politician_line2">%1$s, %2$s</string>
     <string name="politician_line3">Situação: %1$s</string>
     <string name="list_item_image_view_content_description">PartyImage</string>
 
-    <string name="app_description">O aplicativo Lista de Janot é um trabalho acadêmico para a disciplina de Laboratório de Desenvolvimento para Móveis da PUC Minas, lecionada pelo professor Humberto.</string>
+    <string name="app_description">
+        <![CDATA[
+
+            <p>O aplicativo Lista de Janot é um trabalho acadêmico para a disciplina de Laboratório
+            de Desenvolvimentopara Móveis da PUC Minas, lecionada pelo professor Humberto.</p>
+
+            <p>
+                <b>Bibliotecas de código aberto utilizadas:</b>
+                <br />
+                <a href="https://code.google.com/p/google-gson/">google-gson</a><br />
+                <a href="http://square.github.io/picasso/">Picasso</a><br />
+                <a href="http://twitter4j.org/en/index.html">Twitter4J</a><br />
+                <a href="https://github.com/ocpsoft/prettytime">prettytime</a>
+            </p>
+
+            <p>
+                Este é um aplicativo de código aberto e não licenciado.
+                Seu código fonte pode ser encontrado em <a href="https://github.com/mcassiano/lista-de-janot">
+                https://github.com/mcassiano/lista-de-janot</a>.
+            </p>
+        ]]>
+
+    </string>
 
     <string name="fragment_parties_title">Partidos</string>
     <string name="fragment_about_title">Sobre</string>
@@ -29,7 +51,7 @@
 
     <string name="error_connectivity_problem">Não foi possível realizar operação. Verifique se está online.</string>
 
-    <string name="twitter_search_query">#operacaolavajato</string>
+    <string name="twitter_search_query">#lavajato</string>
 
 
 </resources>

@@ -28,8 +28,16 @@ import twitter4j.TwitterMethod;
  */
 public class TweetsFragment extends ListFragment {
 
+    public static final String TAG = "TweetsFragment";
+
     private ListFragmentSwipeRefreshLayout refreshLayout;
     AsyncTwitter twitter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
 
     @Override

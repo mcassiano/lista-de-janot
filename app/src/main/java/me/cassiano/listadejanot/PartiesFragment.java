@@ -30,6 +30,17 @@ import me.cassiano.listadejanot.models.Politician;
  */
 public class PartiesFragment extends Fragment {
 
+    public static final String TAG = "PartiesFragment";
+    private final String PARTIES_DATA_KEY = "parties";
+
+    ArrayList<Party> parties;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +48,11 @@ public class PartiesFragment extends Fragment {
         getActivity().setTitle(getString(R.string.fragment_parties_title));
 
         View view = inflater.inflate(R.layout.fragment_parties, container, false);
-        List<Party> parties = loadPartiesFromJson();
+
+        if (savedInstanceState == null)
+            parties = (ArrayList<Party>) loadPartiesFromJson();
+        else
+            parties = savedInstanceState.getParcelableArrayList(PARTIES_DATA_KEY);
 
         ListView lv = (ListView) view.findViewById(R.id.parties);
         PartyListViewAdapter adapter = new PartyListViewAdapter( parties);
@@ -75,9 +90,15 @@ public class PartiesFragment extends Fragment {
 
         Gson gson = new Gson();
 
-        List<Party> parties = gson.fromJson(reader, new TypeToken<List<Party>>() {}.getType());
-        return parties;
+        return gson.fromJson(reader, new TypeToken<List<Party>>() {}.getType());
 
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(PARTIES_DATA_KEY, parties);
+    }
+
 
 }

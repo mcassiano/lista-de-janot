@@ -14,8 +14,28 @@ import android.widget.ListView;
 
 public class MainActivity extends BaseActivity {
 
+    private final String ACTIVE_FRAGMENT_POSITION = "activeFragmentPosition";
+
     private DrawerLayout drawer;
     private ListView drawerMenu;
+
+    private FragmentEnum activeFragment;
+
+    private enum FragmentEnum {
+
+        Parties(0, PartiesFragment.TAG),
+        Tweets(1, TweetsFragment.TAG),
+        About(2, AboutFragment.TAG);
+
+        int fragmentId;
+        String fragmentTag;
+
+        FragmentEnum(int id, String tag) {
+            fragmentId = id;
+            fragmentTag = tag;
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,33 +58,49 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        selectItem(0);
+        if (savedInstanceState == null) {
+            activeFragment = FragmentEnum.Parties;
+        }
+
+        else {
+            activeFragment = FragmentEnum.values()
+                    [savedInstanceState.getInt(ACTIVE_FRAGMENT_POSITION)];
+        }
+
+        selectItem(activeFragment.fragmentId);
 
     }
 
     private void selectItem(int position) {
 
-        Fragment fragment = null;
+        FragmentEnum whatFragment = FragmentEnum.values()[position];
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
-        // TODO: Criar enum ou outro meio de indentificar fragments sem ser hardcoded.
+        Fragment fragment = fragmentManager.findFragmentByTag(whatFragment.fragmentTag);
 
-        switch (position) {
-            case 0:
-                fragment = new PartiesFragment();
-                break;
+        if (fragment == null) {
 
-            case 1:
-                fragment = new TweetsFragment();
-                break;
+            switch (whatFragment) {
+                case Parties:
+                    fragment = new PartiesFragment();
+                    break;
 
-            case 2:
-                fragment = new AboutFragment();
-                break;
+                case Tweets:
+                    fragment = new TweetsFragment();
+                    break;
+
+                case About:
+                    fragment = new AboutFragment();
+                    break;
+            }
+
+            fragmentManager.beginTransaction().
+                    replace(R.id.content_frame, fragment, whatFragment.fragmentTag).commit();
+
         }
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().
-                replace(R.id.content_frame, fragment).commit();
+
+        activeFragment = whatFragment;
 
         drawerMenu.setItemChecked(position, true);
         drawer.closeDrawer(drawerMenu);
@@ -88,4 +124,12 @@ public class MainActivity extends BaseActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(ACTIVE_FRAGMENT_POSITION, activeFragment.fragmentId);
+        super.onSaveInstanceState(outState);
+    }
+
+
 }
